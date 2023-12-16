@@ -22,13 +22,13 @@ begin
     puts "Error: El ID #{id} ya está en uso. Por favor, elige otro ID."
   else
     # Guardar información y mostrar mensaje
-    guardar(redis, id, name, age)
+    keep(redis, id, name, age)
     puts "\nGuardando..."
     sleep 4
     puts "\nInformación guardada para la persona con ID #{id}\n"
 
     # Mostrar información para la persona recién guardada
-    result = mostrar(redis, id)
+    result = show(redis, id)
     puts result
   end
 

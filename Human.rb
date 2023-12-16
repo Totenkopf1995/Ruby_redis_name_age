@@ -1,11 +1,11 @@
 # Human.rb
 
-def guardar(redis, id, name, age)
+def keep(redis, id, name, age)
   redis.hset("person:#{id}", 'name', name)
   redis.hset("person:#{id}", 'age', age.to_s)
 end
 
-def mostrar(redis, id)
+def show(redis, id)
   name = redis.hget("person:#{id}", 'name')
   age = redis.hget("person:#{id}", 'age')
 
@@ -14,6 +14,11 @@ def mostrar(redis, id)
   result += "Edad: #{age}\n" unless age.nil?
 
   result
+end
+
+def eliminate(redis, id)
+  redis.del("person:#{id}")
+
 end
 
 def id_exists?(redis, id)
