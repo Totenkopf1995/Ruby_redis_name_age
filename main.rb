@@ -11,7 +11,6 @@ begin
             1 = Guardar informacion\n
             2 = Mostrar informacion\n
             3 = Eliminar informacion"
-
   information = gets.chomp.to_i
 
   # Validar la descion tomada por el usuario

@@ -27,7 +27,6 @@ end
 # Funcion para eliminar ingformacion de redis
 def eliminate(redis, id)
   redis.del("person:#{id}")
-
 end
 
 # Funcion para verificar la existencia del ID
