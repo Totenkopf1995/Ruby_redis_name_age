@@ -17,7 +17,7 @@ def show(redis, id)
   name = redis.hget("person:#{id}", 'name')
   age = redis.hget("person:#{id}", 'age')
 
-  result = "ID: #{id}\n"
+  result = "\nID: #{id}\n"
   result += "Nombre: #{name}\n" unless name.nil?
   result += "Edad: #{age}\n" unless age.nil?
 

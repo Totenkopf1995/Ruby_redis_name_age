@@ -7,7 +7,7 @@ begin
   redis = Redis.new(host: 'localhost', port: 6379, db: 0)
 
   # Preguntar al usuario que desea relizar
-  puts "Que desea realizar en este momento?: \n
+  puts "Que desea realizar en este momento?:\n
             1 = Guardar informacion\n
             2 = Mostrar informacion\n
             3 = Eliminar informacion"
@@ -15,7 +15,8 @@ begin
   information = gets.chomp.to_i
 
   # Validar la descion tomada por el usuario
-  if information == 1
+  case information
+  when 1
     # Obtener información para una nueva persona
     puts '=' * 30
     id = obtener_input('Indica el ID').to_i
@@ -39,7 +40,7 @@ begin
       result = show(redis, id)
       puts result
     end
-  elsif information == 2
+  when 2
     # Mostrar información para la persona
     puts '=' * 30
     print 'Cual ID deseas ver: '
@@ -50,20 +51,19 @@ begin
 
     result = show(redis, id)
     puts result
-  elsif information == 3
-    puts 'Cual ID que desea borrar: '
+  when 3
+    puts '=' * 30
+    print 'Cual ID que desea borrar: '
     id = gets.chomp
+    puts '=' * 30
+
     eliminate(redis, id)
-    puts 'Borrando...'
+    puts "\nBorrando..."
     sleep 4
-    puts "ID #{id} eliminado"
+    puts "\nID #{id} eliminado"
   else
     puts 'Opcion no valida'
   end
-
-
-
-
 
 rescue StandardError => e
   puts "Error: #{e.message}"
