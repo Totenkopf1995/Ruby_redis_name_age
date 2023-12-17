@@ -80,8 +80,6 @@ begin
     else
       puts "\nLa clave 'person:#{id}' NO existe en la base de datos.\n"
     end
-
-
   else
     puts "\nOpcion no valida".upcase
   end
