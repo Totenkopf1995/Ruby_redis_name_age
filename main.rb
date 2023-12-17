@@ -44,12 +44,16 @@ begin
     puts '=' * 30
     print 'Cual ID deseas ver: '
     id = gets.chomp
-
-    # Linea de separacion
     puts '=' * 30
 
-    result = show(redis, id)
-    puts result
+    # Verificar si el ID existe para poder mostrarlo
+    if redis.hexists("person:#{id}", 'name')
+      puts "Debug: La clave 'person:#{id}' existe en la base de datos.\n"
+      result = show(redis, id)
+      puts result
+    else
+      puts "\nLa clave 'person:#{id}' NO existe en la base de datos.\n"
+    end
   when 3
     puts '=' * 30
     print 'Cual ID que desea borrar: '
@@ -61,7 +65,7 @@ begin
     sleep 4
     puts "\nID #{id} eliminado"
   else
-    puts 'Opcion no valida'
+    puts "\nOpcion no valida".upcase
   end
 
 rescue StandardError => e
