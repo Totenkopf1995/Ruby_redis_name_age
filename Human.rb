@@ -32,10 +32,3 @@ def eliminate(redis, id)
 
   redis.del("person:#{id}")
 end
-
-# Funcion para verificar la existencia del ID
-def id_exists?(redis, id)
-
-  puts "Debug: Verificando existencia de la clave 'person:#{id}' en la base de datos."
-  redis.hexists("person:#{id}", 'name')
-end
