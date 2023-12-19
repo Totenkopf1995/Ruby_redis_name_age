@@ -1,5 +1,4 @@
 # main.rb
-
 require 'redis'
 require 'colorize'
 require_relative 'Human'
@@ -19,9 +18,10 @@ begin
   when 1
     # Obtener información para una nueva persona
     puts '=' * 30
-    id = obtener_input('Indica el ID').to_i
+    id = obtener_input('Indica el ID')
     puts '=' * 30
-
+    validation(id)
+    
     name = obtener_input('Indica el nombre')
     age = obtener_input('Indica la edad').to_i
     puts
@@ -36,7 +36,7 @@ begin
       # Guardar información y mostrar mensaje
       keep(redis, id, name, age)
 
-      puts "Guardando..."
+      puts "Guardando...".colorize(:color => :yellow)
       sleep 4
 
       puts "\nInformación guardada para la persona con ID #{id}\n"
@@ -48,9 +48,9 @@ begin
   when 2
     # Mostrar información para la persona
     puts '=' * 30
-    print 'Cual ID deseas ver: '
-    id = gets.chomp
+    id = obtener_input('Cual ID deseas ver')
     puts '=' * 30
+    validation(id)
 
     # Verificar si el ID existe para poder mostrarlo
     if redis.hexists("person:#{id}", 'name')
@@ -64,9 +64,9 @@ begin
   when 3
     # Eliminar ID elegido
     puts '=' * 30
-    print 'Cual ID que desea borrar: '
-    id = gets.chomp
+    id = obtener_input('Cual ID desea borrar')
     puts '=' * 30
+    validation(id)
 
     # Verificar si el ID existe para borrarlo
     if redis.hexists("person:#{id}", 'name')
@@ -74,15 +74,15 @@ begin
       puts "Debug: La clave 'person:#{id}' existe en la base de datos.\n".colorize(:color => :green)
       eliminate(redis, id)
 
-      puts "\nBorrando..."
+      puts "\nBorrando...".colorize(:color => :yellow)
       sleep 4
 
-      puts "\nID #{id} eliminado"
+      puts "\nID #{id} eliminado".colorize(:color => :green)
     else
       puts "\nLa clave 'person:#{id}' NO existe en la base de datos.\n".colorize(:color => :red)
     end
   else
-    puts "\nOpcion no valida".upcase
+    puts "\nOpcion no valida".upcase.colorize(:color => :red)
   end
 
 rescue StandardError => e
