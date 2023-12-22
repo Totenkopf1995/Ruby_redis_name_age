@@ -11,6 +11,7 @@ end
 def validation(id)
   begin
     user_id = Integer(id)
+    sleep 2
     puts "El ID ingresado es un número entero: #{user_id}".colorize(:color => :green)
     puts
 

@@ -71,6 +71,8 @@ begin
     # Verificar si el ID existe para borrarlo
     if redis.hexists("person:#{id}", 'name')
 
+      sleep 2
+
       puts "Debug: La clave 'person:#{id}' existe en la base de datos.\n".colorize(:color => :green)
       eliminate(redis, id)
 
