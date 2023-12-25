@@ -8,3 +8,4 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 gem 'redis'
 gem 'rubocop', group: 'development', require: false
 gem 'colorize'
+gem 'rspec'
